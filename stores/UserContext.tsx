@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
-import { generateUsers, User } from '../src/components/mockUsers';
+import { generateUsers, User } from '../src/components/mockUsers'; // Đảm bảo file này tồn tại
 
 interface State {
   users: User[];
@@ -8,7 +8,9 @@ interface State {
 
 type Action =
   | { type: 'SET_USERS'; payload: User[] }
-  | { type: 'SET_PAGE'; payload: number };
+  | { type: 'SET_PAGE'; payload: number }
+  | { type: 'DELETE_USER'; payload: number }
+  | { type: 'UPDATE_USER'; payload: User };
 
 const initialState: State = {
   users: [],
@@ -29,6 +31,18 @@ function reducer(state: State, action: Action): State {
       return { ...state, users: action.payload };
     case 'SET_PAGE':
       return { ...state, currentPage: action.payload };
+    case 'DELETE_USER':
+      return {
+        ...state,
+        users: state.users.filter(user => user.id !== action.payload),
+      };
+    case 'UPDATE_USER':
+      return {
+        ...state,
+        users: state.users.map(user =>
+          user.id === action.payload.id ? action.payload : user
+        ),
+      };
     default:
       return state;
   }

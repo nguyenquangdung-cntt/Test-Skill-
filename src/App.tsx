@@ -65,7 +65,6 @@ function App() {
                   <th>Email</th>
                   <th className='text-center'>Registration date</th>
                   <th className='text-center'>Status</th>
-                  <th className='text-center'>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -88,14 +87,6 @@ function App() {
                       <span className={`badge ${user.active ? 'bg-success' : 'bg-secondary'}`}>
                         {user.active ? 'Active' : 'Inactive'}
                       </span>
-                    </td>
-                    <td className='text-center'>
-                      <button className="btn btn-danger" aria-label="Delete user">
-                        <i className="fa-solid fa-trash"></i>
-                      </button>
-                      <button className="btn btn-success ms-2" aria-label="Edit user">
-                        <i className="fa-solid fa-edit"></i>
-                      </button>
                     </td>
                   </tr>
                 ))}
